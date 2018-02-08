@@ -1,7 +1,7 @@
 # docker-pytorch
 [![](https://images.microbadger.com/badges/image/smizy/pytorch.svg)](https://microbadger.com/images/smizy/pytorch "Get your own image badge on microbadger.com") 
 [![](https://images.microbadger.com/badges/version/smizy/pytorch.svg)](https://microbadger.com/images/smizy/pytorch "Get your own version badge on microbadger.com")
-[![CircleCI](https://circleci.com/gh/smizy/docker-pytorch.svg?style=svg&circle-token=423a510e5c0a139c993fea046d487e34ff88f5ba)]
+[![CircleCI](https://circleci.com/gh/smizy/docker-pytorch.svg?style=svg)](https://circleci.com/gh/smizy/docker-pytorch)
 
 PyTorch docker image(CPU version) based on alpine
 
