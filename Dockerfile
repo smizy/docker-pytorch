@@ -1,4 +1,4 @@
-FROM smizy/scikit-learn:0.19.1-alpine
+FROM smizy/scikit-learn:0.19.2-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -16,13 +16,14 @@ LABEL \
     org.label-schema.vcs-url="https://github.com.com/smizy/docker-pytorch"
 
 ENV PYTORCH_VERSION      $VERSION
-ENV TORCHVISION_VERSION  0.2.0
-ENV TORCHTEXT_VERSION    0.2.1
+ENV TORCHVISION_VERSION  0.2.1
+ENV TORCHTEXT_VERSION    0.2.3
 
 RUN set -x \
     && apk update \
     # - pytorch build dependencies
     && apk --no-cache add \
+        libexecinfo \
         libgomp \
         py3-cffi \
     && apk --no-cache add --virtual .builddeps \
@@ -32,6 +33,7 @@ RUN set -x \
         # freetype-dev \
         git \
         # jpeg-dev \
+        libexecinfo-dev \
         linux-headers \
         openblas-dev \
         python3-dev \
