@@ -30,18 +30,17 @@ RUN set -x \
         bash \
         build-base \
         cmake \
-        # freetype-dev \
         git \
-        # jpeg-dev \
         libexecinfo-dev \
         linux-headers \
         openblas-dev \
         python3-dev \
-        # zlib-dev \
     && pip3 install pyyaml \
     # - pytorch src
     && git clone --recursive -b v${PYTORCH_VERSION} --single-branch --depth 1 https://github.com/pytorch/pytorch /tmp/pytorch \
     && cd /tmp/pytorch \
+    # Error: backtrace symbol not found
+    && sed -ri 's/(Caffe2_DEPENDENCY_LIBS dl)/\1 execinfo/' CMakeLists.txt \
     # - build 
     && python setup.py install \
     && cd /tmp \
