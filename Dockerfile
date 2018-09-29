@@ -1,4 +1,4 @@
-FROM smizy/scikit-learn:0.19.2-alpine
+FROM smizy/scikit-learn:0.20.0-alpine
 
 ARG BUILD_DATE
 ARG BUILD_NUMBER
@@ -41,7 +41,7 @@ RUN set -x \
     # - pytorch src
     && git clone --recursive -b v${PYTORCH_BUILD_VERSION} --single-branch --depth 1 https://github.com/pytorch/pytorch /tmp/pytorch \
     && cd /tmp/pytorch \
-    # Error: backtrace symbol not found
+    # - Error: backtrace symbol not found
     && sed -ri 's/(Caffe2_DEPENDENCY_LIBS dl)/\1 execinfo/' CMakeLists.txt \
     # - build 
     && EXTRA_CAFFE2_CMAKE_FLAGS="-DBLAS=OpenBLAS" \
