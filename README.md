@@ -7,10 +7,10 @@ PyTorch docker image(CPU version) based on alpine
 
 ```
 # Run Jupyter Notebook container (see token in log)
-docker run -it --rm -p 8888:8888 -v $(pwd):/code smizy/pytorch
+docker run -it --rm -p 8888:8888 -v $PWD:/code smizy/pytorch
 
 # Or use PASSWORD environment variable instead of token
-docker run -it --rm -p 8888:8888 -v $(pwd):/code -e PASSWORD=mysecretpass smizy/pytorch
+docker run -it --rm -p 8888:8888 -v $PWD:/code -e PASSWORD=mysecretpass smizy/pytorch
 
 # open browser
 open http://$(docker-machine ip default):8888
