@@ -1,6 +1,7 @@
 FROM smizy/scikit-learn:0.19.2-alpine
 
 ARG BUILD_DATE
+ARG BUILD_NUMBER
 ARG VCS_REF
 ARG VERSION
 
@@ -15,9 +16,10 @@ LABEL \
     org.label-schema.version=$VERSION \
     org.label-schema.vcs-url="https://github.com.com/smizy/docker-pytorch"
 
-ENV PYTORCH_VERSION      $VERSION
-ENV TORCHVISION_VERSION  0.2.1
-ENV TORCHTEXT_VERSION    0.2.3
+ENV PYTORCH_BUILD_VERSION  ${VERSION:-"0.4.1"}
+ENV PYTORCH_BUILD_NUMBER   ${BUILD_NUMBER:-"1"}
+ENV TORCHVISION_VERSION    0.2.1
+ENV TORCHTEXT_VERSION      0.2.3
 
 RUN set -x \
     && apk update \
@@ -37,12 +39,13 @@ RUN set -x \
         python3-dev \
     && pip3 install pyyaml \
     # - pytorch src
-    && git clone --recursive -b v${PYTORCH_VERSION} --single-branch --depth 1 https://github.com/pytorch/pytorch /tmp/pytorch \
+    && git clone --recursive -b v${PYTORCH_BUILD_VERSION} --single-branch --depth 1 https://github.com/pytorch/pytorch /tmp/pytorch \
     && cd /tmp/pytorch \
     # Error: backtrace symbol not found
     && sed -ri 's/(Caffe2_DEPENDENCY_LIBS dl)/\1 execinfo/' CMakeLists.txt \
     # - build 
-    && python setup.py install \
+    && EXTRA_CAFFE2_CMAKE_FLAGS="-DBLAS=OpenBLAS" \
+        python setup.py install \
     && cd /tmp \
     # - pillow build dependency
     && apk --no-cache add \

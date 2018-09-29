@@ -9,6 +9,7 @@ jobs:
     environment:
       VERSION: "0.4.1"
       TAG: "0.4.1-cpu-alpine"
+      BUILD_NUMBER: "1"
       # TAG: ${VERSION}-alpine
       # TAG_MINOR: ${VERSION%.*}-alpine
       # TAG_MAJOR: ${VERSION%%.*}-alpine 
